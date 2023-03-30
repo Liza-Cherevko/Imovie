@@ -1,11 +1,15 @@
-import React from 'react'
-import { AppBar, Toolbar, Typography, IconButton, Tabs, Tab} from '@mui/material';
-import Button from '@mui/material/Button';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import HdIcon from '@mui/icons-material/Hd';
-import WhatshotIcon from '@mui/icons-material/Whatshot';
-import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import { AppBar, IconButton, Tab, Tabs, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import { Box } from '@mui/system';
+import Button from '@mui/material/Button';
+import DrawerComponent from './DrawerComponent';
+import HdIcon from '@mui/icons-material/Hd';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import React from 'react';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -44,14 +48,29 @@ interface TabPanelProps {
 
 
 const NavbarComponent = () => {
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+    const navigate = useNavigate()
+
+  const handleChange = (e,newValue)=>{
+    setValue(e, newValue)
+ 
+  }
+
+// theme costomazation
+const theme = useTheme();
+const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
+console.log(isMatch);
+
+// useEffect(()=>{
+//   if(value===0) navigate('/');
+//   if(value===1) navigate('/trending');
+//   if(value===2) navigate('/series');
+
+// },[value])
 
   return (
-      <AppBar position="static" >
+   <AppBar  >
     <Toolbar>
       <IconButton
         size="large"
@@ -59,18 +78,22 @@ const NavbarComponent = () => {
         color="inherit"
         aria-label="menu"
         sx={{ mr: 2 }}
-      >
+      >=
         <LiveTvIcon fontSize='large' />
       </IconButton>
 
-        <Tabs value={value} onChange={handleChange} >
-                  <Tab style={{ color: 'white', marginRight: '40px' }} label='Movies' {...a11yProps(0)} icon={<HdIcon fontSize='medium'/> } />
-                  <Tab style={{ color: 'white', marginRight: '40px' }} label='Trending' {...a11yProps(1)} icon={<WhatshotIcon fontSize='medium' />} />
-                  <Tab style={{ color: 'white', marginRight: '40px' }} label='TV Series' {...a11yProps(2)} icon={<LocalMoviesIcon  fontSize='medium' />} />
-    </Tabs>          
-      <Button color="inherit" style={{marginLeft:'auto'}}>Login</Button>
+  {!isMatch && (
+          <Tabs value={value} onChange={handleChange} >
+          <Tab style={{ color: 'white', marginRight: '40px' }} label='Movies' {...a11yProps(0)} icon={<HdIcon fontSize='medium'/> }  component={NavLink} to='/' />
+          <Tab style={{ color: 'white', marginRight: '40px' }} label='Trending' {...a11yProps(1)} icon={<WhatshotIcon fontSize='medium' />}  component={NavLink} to='/trending'/>
+          <Tab style={{ color: 'white', marginRight: '40px' }} label='TV Series' {...a11yProps(2)} icon={<LocalMoviesIcon  fontSize='medium' />}  component={NavLink} to='/series'/>
+
+</Tabs>
+  )}
+ <Tab style={{ color: 'white', marginLeft: 'auto' }}  {...a11yProps(2)} icon={ <DrawerComponent/>} />
     </Toolbar>
   </AppBar>
+
   )
 }
 
