@@ -5,7 +5,9 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 import HdIcon from '@mui/icons-material/Hd';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Box } from '@mui/system';
+
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -51,7 +53,10 @@ const NavbarComponent = () => {
   };
 
   return (
-      <AppBar position="static" >
+
+
+    <AppBar position="static" >
+
     <Toolbar>
       <IconButton
         size="large"
@@ -67,10 +72,13 @@ const NavbarComponent = () => {
                   <Tab style={{ color: 'white', marginRight: '40px' }} label='Movies' {...a11yProps(0)} icon={<HdIcon fontSize='medium'/> } />
                   <Tab style={{ color: 'white', marginRight: '40px' }} label='Trending' {...a11yProps(1)} icon={<WhatshotIcon fontSize='medium' />} />
                   <Tab style={{ color: 'white', marginRight: '40px' }} label='TV Series' {...a11yProps(2)} icon={<LocalMoviesIcon  fontSize='medium' />} />
-    </Tabs>          
-      <Button color="inherit" style={{marginLeft:'auto'}}>Login</Button>
-    </Toolbar>
-  </AppBar>
+        </Tabs>        
+        <Tab style={{ marginLeft: 'auto', color: "white"}} icon={<MenuIcon fontSize='large'/> }></Tab>
+     
+        </Toolbar>
+    </AppBar>
+
+
   )
 }
 
