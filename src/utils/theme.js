@@ -8,10 +8,16 @@ const theme = createTheme({
         secondary: {
             main: '#14213d',
         },
+     
         common: {
             drawer: 'A22032',
         },
     },
+    typography: {
+        allVariants: {
+          color: "white"
+        },
+      },
 });
 
 export default theme;
