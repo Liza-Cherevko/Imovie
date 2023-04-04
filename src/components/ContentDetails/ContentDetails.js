@@ -1,7 +1,6 @@
 import { Button } from '@mui/material'
 import React from 'react'
 import {img500x500 } from '../../utils/img'
-
 export default function ContentDetails({movie})  {
   return (
     <div className='cards' id='bright' style={{color:'white'} }>
@@ -22,7 +21,10 @@ export default function ContentDetails({movie})  {
           <Button color='error'> view trailer</Button>
         </div>
       </div>
-   
+
+      {/* <div className='right'>
+      <img className='img-bg' alt='logo' src={ `${img500x500}/${movie?.backdrop_path}`} />
+   </div> */}
 </div>
 
 

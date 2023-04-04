@@ -17,14 +17,7 @@ code {
 
 /* cards-style */
 
-.movie_list{
-  display: flex;
- margin-top: 95px;
- flex-wrap: wrap;
- justify-content: space-around;
- align-items: center;
- gap: 50px;
-}
+
 .cards{
   display: block;
   top: 0px;
@@ -102,4 +95,10 @@ code {
 .text{
   font-size: 15px;
   padding-bottom: 15px;
+}
+.right{
+  float: right;
+}
+.css-nb7bwn-MuiButtonBase-root-MuiPaginationItem-root {
+  color: aliceblue;
 }
