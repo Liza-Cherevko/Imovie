@@ -3,6 +3,7 @@ import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import ContentDetails from '../../components/ContentDetails/ContentDetails';
 import { Box } from '@mui/system';
+import { autocompleteClasses } from '@mui/material';
 const API_URL = 'https://api.themoviedb.org/3/discover/movie?api_key=1160cac5ff26e1cc795d5733856ce01c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1';
 
 function Movies() {
@@ -26,24 +27,17 @@ useEffect(()=>{
 },[]);
 console.log(movies);
 
-const [spacing, setSpacing] = React.useState(2);
 
-const jsx = `
-<Grid container spacing={${spacing}}>
-`;
   return (
-    <Box sx={{ 
-      maxWidth: '1200px',
-     margin:'auto'
-   }}>
-          <Grid container wrap='wrap' spacing={3} style={{marginTop:'100px'}} >
+    <Box>
+          <div  className='movie_list' >
         {movies?.map(movie => (
-          <div className='cards'>
-            <ContentDetails movie={movie} key={movie.id} />
+          <div  key={movie.filmId} onClick={() => console.log(movie.id)}  >
+            <ContentDetails movie={movie}  />
             </div>
         )) }
    
-    </Grid>
+    </div>
  </Box>
   )
 }
