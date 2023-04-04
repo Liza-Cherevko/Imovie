@@ -10,7 +10,7 @@ const theme = createTheme({
             main: '#14213d',
         },
         pagination: {
-            main: '#741414;',
+            main: '#bf8900',
         },
      
         common: {
