@@ -78,12 +78,18 @@ code {
   font-weight: bold;
   font-size: 12px;
   font-weight: bold;
-  border: 1px solid #9e47af;
+  /* border: 1px solid #9e47af; */
   border-radius: 50%;
   width: 30px;
   text-align: center;
   padding: 5px;
   margin-top: 15px;
+}
+.range-green{
+  border: 1px solid #25dd04;
+}
+.range-orange{
+    border: 1px solid #ce8404;
 }
 .original_title{
  text-align: center;

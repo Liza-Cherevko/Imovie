@@ -1,7 +1,13 @@
 import { Button } from '@mui/material'
-import React from 'react'
-import {img500x500 } from '../../utils/img'
-export default function ContentDetails({movie})  {
+import React, { useState } from 'react'
+import { img500x500 } from '../../utils/img';
+
+export default function ContentDetails({ movie }) {
+  const [rate, setRate] = useState(movie.vote_average);
+ 
+
+  const rangeBorder = movie.vote_average > 7 ? 'borderColor:green ': movie.vote_average>5 ? 'borderColor:orange' : 'borderColor:red'
+
   return (
     <div className='cards' id='bright' style={{color:'white'} }>
       <div className='info_section'>
@@ -11,7 +17,7 @@ export default function ContentDetails({movie})  {
           <div className='header_info'>
           <h1 className='movie_name'>{movie?.title}</h1>
           <h4 className='movie_release'>{movie?.release_date}</h4>
-            <span className='range'>{movie?.vote_average}</span>
+            <span className={` range ${rate > 6 ? 'range-green' :  'range-orange'}`}> { movie?.vote_average}</span>
         </div>
 
         </div>

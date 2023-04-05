@@ -2,7 +2,8 @@ import React, {useState,useEffect} from 'react';
 import axios from 'axios';
 import Grid from '@mui/material/Grid';
 import ContentDetails from '../../components/ContentDetails/ContentDetails';
-import AddPagination from '../../components/Navbar/Pagination/AddPagination';
+import Genre from '../../components/Genre/Genre';
+import AddPagination from '../../components/Pagination/AddPagination';
 
 
 function Movies() {
@@ -11,7 +12,9 @@ function Movies() {
   const [numberOfPages, setNumberOfPages] = useState(10)
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-
+  const [genres, setGenres] = useState([]);
+  console.log(genres);
+  // console.log(movies);
   const fetchMovies = async () => {
     try {
       const { data } = await axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=1160cac5ff26e1cc795d5733856ce01c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=${page}`)
@@ -27,16 +30,16 @@ function Movies() {
 useEffect(()=>{
   fetchMovies()
 },[page]);
-console.log(movies);
+
 
 
   return (
     <>
-      
-          <Grid container direction='row' justify='center' alignItems='center' marginTop='150px'>
+      <Genre genres={genres} setGenres={setGenres} />
+          <Grid container direction='row' justify='center' alignItems='center' marginTop='100px'>
      {movies?.map(movie => (
-       <Grid item md={6} >
-       <ContentDetails movie={movie} key={movie.filmId} onClick={() => console.log(movie.id)}  />
+       <Grid item md={6} key={movie.id} onClick={() => console.log(movie.id)} >
+       <ContentDetails movie={movie}    />
        </Grid>
       
      ))}

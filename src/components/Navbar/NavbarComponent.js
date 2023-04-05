@@ -1,9 +1,7 @@
 import { AppBar, IconButton, Tab, Tabs, Toolbar, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-
+import {  useState } from 'react';
 import { Box } from '@mui/system';
-import Button from '@mui/material/Button';
 import DrawerComponent from './DrawerComponent';
 import HdIcon from '@mui/icons-material/Hd';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
@@ -49,29 +47,28 @@ interface TabPanelProps {
 
 
 const NavbarComponent = () => {
-    const [value, setValue] = useState(0);
+    // const [value, setValue] = useState(0);
+    // const handleChange = (e,newValue)=>{
+  //   setValue(e, newValue)
+  // }
+    const [value, setValue] = React.useState('one');
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+      setValue(newValue);
+    };
 
-  const handleChange = (e,newValue)=>{
-    setValue(e, newValue)
- 
-  }
 
 // theme costomazation
 const theme = useTheme();
 const isMatch = useMediaQuery(theme.breakpoints.down('sm'));
 console.log(isMatch);
 
-// useEffect(()=>{
-//   if(value===0) navigate('/');
-//   if(value===1) navigate('/trending');
-//   if(value===2) navigate('/series');
 
-// },[value])
 
   return (
-   <AppBar  >
+   <AppBar   >
     <Toolbar>
       <IconButton
         size="large"
@@ -84,18 +81,48 @@ console.log(isMatch);
       </IconButton>
 
   {!isMatch && (
-          <Tabs value={value} onChange={handleChange} >
-          <Tab style={{ color: 'white', marginRight: '40px' }} label='Movies' {...a11yProps(0)} icon={<HdIcon fontSize='medium'/> }  component={NavLink} to='/' />
-          <Tab style={{ color: 'white', marginRight: '40px' }} label='Trending' {...a11yProps(1)} icon={<WhatshotIcon fontSize='medium' />}  component={NavLink} to='/trending'/>
-          <Tab style={{ color: 'white', marginRight: '40px' }} label='TV Series' {...a11yProps(2)} icon={<LocalMoviesIcon  fontSize='medium' />}  component={NavLink} to='/series'/>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            aria-label="basic tabs example"
+            textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="secondary tabs example"
+          >
+
+          <Tab value="one" style={{ color: '#b17a28', marginRight: '40px' }} label='Movies' {...a11yProps(0)} icon={<HdIcon fontSize='medium'/> }  component={NavLink}   to='/' />
+          <Tab value="two" style={{ color: '#b17a28', marginRight: '40px' }} label='Trending' {...a11yProps(1)} icon={<WhatshotIcon fontSize='medium' />}  component={NavLink} to='/trending'/>
+          <Tab value="three" style={{ color: '#b17a28', marginRight: '40px' }} label='TV Series' {...a11yProps(2)} icon={<LocalMoviesIcon  fontSize='medium' />}  component={NavLink} to='/series'/>
 
 </Tabs>
   )}
  <Tab style={{ color: 'white', marginLeft: 'auto' }}  {...a11yProps(2)} icon={ <DrawerComponent/>} />
     </Toolbar>
   </AppBar>
+    )
+// const [value, setValue] = React.useState('one');
 
-  )
+// const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+//   setValue(newValue);
+// };
+
+// return (
+//   <Box sx={{ width: '100%' }}>
+//     <Tabs
+//       value={value}
+//       onChange={handleChange}
+//       textColor="secondary"
+//       indicatorColor="primary"
+//       aria-label=" tabs example"
+//     >
+//       <Tab value="one" label="Item One" />
+//       <Tab value="two" label="Item Two" />
+//       <Tab value="three" label="Item Three" />
+//     </Tabs>
+//   </Box>
+// )
+
+
 }
 
 export default NavbarComponent
