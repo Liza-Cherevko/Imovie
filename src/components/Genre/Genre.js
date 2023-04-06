@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-
-const Genre = ({genres, setGenres }) => {
-
+const Genre = ({genres, setGenres,selectedGenres,setSelectedGenres }) => {
+    let { id } = useParams();
     const [isError, setIsError] = useState(false); 
     
   const fetchGenre = async () => {
@@ -22,23 +20,47 @@ useEffect(()=>{
     fetchGenre()
 },[]);
 
+// handle add 
+    const handleAddGenres = genre => { 
+        setSelectedGenres([...selectedGenres, genre]);
+        setGenres(genres?.filter(g=>g.id!==genre?.id))
+    }
+// handle remove 
+const handleRemoveGenres = genre => { 
+    setSelectedGenres(selectedGenres?.filter(selected=>selected?.id !== genre?.id));
+    setGenres([...genres, genre])
+}
 
 
   return (
-      <div style={{marginTop:'80px'}}>
-          
-          {genres?.map(genre => (
-              <div style={{ padding: '10px 0' }} key={genre.id } >
+      <div style={{marginTop:'80px', display:'flex', flexWrap:'wrap'}}>
+            <div style={{ padding: '10px 0' }}  >
+          {selectedGenres?.map(genre=>(
               <Chip
-                  label={genre.name }
-                      color='secondary'
-                       style={{fontSize:'1.2em', margin:'3px'}}             
+                  onDelete={()=>handleRemoveGenres(genre)}
+                  style={{
+                  backgroundColor: '#b7b7a4',
+                  color: '#000',
+                  fontSize: '1.2em',
+                  margin: '3px'
+              }}
+                  clickable label={genre?.name} />
+          )) }
+{genres?.map(genre => (
+  
+    <Chip
+               key={genre.id}
+               onClick={ ()=>handleAddGenres(genre)}
+               label={genre.name }
+               color='secondary'
+               style={{fontSize:'1.2em', margin:'3px'}}             
                   />
-                    </div>
+                 
           )) }
           
 
-   
+
+          </div>
       </div>
   )
 }
