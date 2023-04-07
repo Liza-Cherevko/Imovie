@@ -1,13 +1,13 @@
 import { Button } from '@mui/material'
 import React, { useState } from 'react'
 import { img500x500 } from '../../utils/img';
+import AppModal from '../../components/Modal/AppModal';
 
 export default function ContentDetails({ movie }) {
   const [rate, setRate] = useState(movie.vote_average);
  
 
-  const rangeBorder = movie.vote_average > 7 ? 'borderColor:green ': movie.vote_average>5 ? 'borderColor:orange' : 'borderColor:red'
-
+ 
   return (
     <div className='cards' id='bright' style={{color:'white'} }>
       <div className='info_section'>
@@ -24,7 +24,11 @@ export default function ContentDetails({ movie }) {
         <div className='movie_desc'>
         <p className='original_title'>{movie?.original_title}</p>
           <p className='text'>{movie?.overview}</p>
-          <Button color='error'> view trailer</Button>
+          <AppModal >
+            <li style={{listStyle:'none'}}>
+            <Button style={{color:'rgb(243 185 23'}}> view trailer</Button>
+            </li>
+       </AppModal>
         </div>
       </div>
 

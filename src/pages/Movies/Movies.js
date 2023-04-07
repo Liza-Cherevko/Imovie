@@ -5,6 +5,8 @@ import ContentDetails from '../../components/ContentDetails/ContentDetails';
 import Genre from '../../components/Genre/Genre';
 import AddPagination from '../../components/Pagination/AddPagination';
 import genresIDs  from '../../utils/genresIDs';
+import Loading from '../../components/Loading/Loading';
+import Errors from '../../components/Errors/Errors';
 
 
 function Movies() {
@@ -29,6 +31,7 @@ function Movies() {
       setLoading(false);
       setNumberOfPages(data?.total_pages)
     } catch (error) {
+
       setIsError(true);
     }
   }
@@ -38,16 +41,19 @@ useEffect(()=>{
   fetchMovies()
 },[page, selectedGenres]);
 
-
+console.log(movies);
 
   return (
     <>
-      <Genre genres={genres}
+     
+      {loading ? <Loading /> : isError ? <Errors /> : (
+        <>
+        <Genre genres={genres}
         setGenres={setGenres}
         selectedGenres={selectedGenres}
         setSelectedGenres={ setSelectedGenres}
       />
-          <Grid container direction='row' justify='center' alignItems='center' marginTop='100px'>
+          <Grid container direction='row' justifyContent='center' alignItems='center' marginTop='100px'>
      {movies?.map(movie => (
        <Grid item md={6} key={movie.id} onClick={() => console.log(movie.id)} >
        <ContentDetails movie={movie}    />
@@ -56,6 +62,8 @@ useEffect(()=>{
      ))}
         <AddPagination setPage={setPage} pageNumber={ numberOfPages} />
       </Grid>
+        </>
+      ) }
 
 </>
   )
