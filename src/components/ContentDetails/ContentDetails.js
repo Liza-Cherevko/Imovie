@@ -5,7 +5,7 @@ import AppModal from '../../components/Modal/AppModal';
 
 export default function ContentDetails({ movie }) {
   const [rate, setRate] = useState(movie.vote_average);
- 
+   const movieID= movie?.id
 
  
   return (
@@ -24,7 +24,7 @@ export default function ContentDetails({ movie }) {
         <div className='movie_desc'>
         <p className='original_title'>{movie?.original_title}</p>
           <p className='text'>{movie?.overview}</p>
-          <AppModal >
+          <AppModal id={movieID}  >
             <li style={{listStyle:'none'}}>
             <Button style={{color:'rgb(243 185 23'}}> view trailer</Button>
             </li>
@@ -32,9 +32,6 @@ export default function ContentDetails({ movie }) {
         </div>
       </div>
 
-      {/* <div className='right'>
-      <img className='img-bg' alt='logo' src={ `${img500x500}/${movie?.backdrop_path}`} />
-   </div> */}
 </div>
 
 
